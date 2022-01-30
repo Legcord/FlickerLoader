@@ -1,18 +1,15 @@
-const extVersion = chrome.runtime.getManifest().version;
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+sleep(5000).then(() => {
 
-const inject = async (branch, version) => {
-  console.log('[FlickerLoader] Injecting...');
-
-  const js = await (await fetch("https://raw.githubusercontent.com/FlickerMod/dist/main/build.js")).text(); // JSON.parse(localStorage.getItem('goosemodCoreJSCache'));
-
-  const el = document.createElement('script');
-  
-  el.appendChild(document.createTextNode(js));
-  
-  document.body.appendChild(el);
-
-  console.log('[FlickerLoader] Injected fetched JS');
-};
-
-
-
+const load = async () => {
+	 console.log('[FlickerLoader] Injecting...');
+	const response = await fetch("https://raw.githubusercontent.com/FlickerMod/dist/main/build.js");
+	const text = await response.text()
+	eval(text);
+}
+const el = document.createElement('script');
+el.appendChild(document.createTextNode(`(${load.toString()})();`));
+document.body.appendChild(el);
+});
