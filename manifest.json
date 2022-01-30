@@ -1,0 +1,37 @@
+{
+    "name": "FlickerLoader",
+    "description": "A light, secure, and easy to use Discord mod; now in your browser.",
+
+    "version": "1.0.0",
+
+    "author": "smartfrigde",
+    "homepage_url": "https://cumcord.com",
+
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["*://*.discord.com/*"],
+            "js": ["content.js"]
+        }
+    ],
+
+    "permissions": [
+        "storage",
+        "webRequest",
+        "webRequestBlocking",
+        "*://*.discord.com/*"
+    ],
+
+    "manifest_version": 2,
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "invalid@cumcord.cum"
+        }
+    }
+}
